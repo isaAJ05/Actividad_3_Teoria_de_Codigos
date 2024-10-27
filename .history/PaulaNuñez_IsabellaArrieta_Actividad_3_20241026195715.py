@@ -1,0 +1,5 @@
+print("Bienvenidx")
+print("Ingrese el tamaño de la matriz")
+= input("Ingrese el número de filas: ")
+nc= input("Ingrese el número de columnas: ")
+q= input("Ingrese la cardinalidad del alfabeto: ")

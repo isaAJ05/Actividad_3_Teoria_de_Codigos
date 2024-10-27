@@ -33,7 +33,7 @@ def hallar_codewords(matriz, q, k): # Hallar los codewords a partir de la matriz
 
 print("Bienvenidx")
 print("Porfavor ingrese los siguientes parametros para la matriz generadora G1 y G2")
-n = int(input("->Digite la longitud del código (n): "))
+n = int(input("\n ->Digite la longitud del código (n): "))
 k = int(input(" ->Digite la dimensión del codigo (k): "))
 q = int(input(" ->Digite la cardinalidad del alfabeto (q): "))
 G1 = []

@@ -14,11 +14,15 @@ def MatrizGeneradora(G, n, k, q):
             elif not all(char in map(str, range((q))) for char in generador):  # si no pertenece al q solicitado
                 print(f"El vector generador debe contener solo caracteres en el rango 0 a {q-1}. Inténtelo de nuevo.")
             generador = input(f"Ingrese el vector generador {i+1} de longitud {n}: ")  # solicita nuevamente el vector
-        G.append([int(char) for char in generador]) # agrega el vector generador a la matriz generadora como una lista de enteros
-    return np.array(G) # retorna la matriz generadora como una matriz de NumPy
+        lista.append(generador)  # agrega el vector a la lista
+        G.append(lista)  # agrega el vector generador a la matriz generadora
+    return G
 
 #Funcion HallarCodewords
 def hallar_codewords(matriz, q, k): # Hallar los codewords a partir de la matriz generadora
+    # Asegurarse de que la matriz es una matriz de NumPy
+    if not isinstance(matriz, np.ndarray):
+        matriz = np.array(matriz)
     v = [] 
     for i in range(q): # Vector de 0 a q-1 para sacar las combinaciones lineales
         v.append(i)
@@ -33,16 +37,16 @@ def hallar_codewords(matriz, q, k): # Hallar los codewords a partir de la matriz
 
 print("Bienvenidx")
 print("Porfavor ingrese los siguientes parametros para la matriz generadora G1 y G2")
-n = int(input("->Digite la longitud del código (n): "))
-k = int(input(" ->Digite la dimensión del codigo (k): "))
-q = int(input(" ->Digite la cardinalidad del alfabeto (q): "))
-G1 = []
+n= input(int("\n ->Digite la longitud del código (n): "))
+k= input(int(" ->Digite la dimensión del codigo (k): "))
+q= input(int(" ->Digite la cardinalidad del alfabeto (q): "))
+G1 =[] 
 G2 =[] 
 print("\n Ingrese la Matriz Generadora G1\n")
-print("\n→ Matriz G1:\n ", MatrizGeneradora(G1, n, k, q))
-print("\n Ingrese la Matriz Generadora G2")
-print("\n→ Matriz G2:\n ", MatrizGeneradora(G2, n, k, q))
-print("\n Codewords G1")
-print("→ C1= ", hallar_codewords(G1, q, k))
-print("\n Codewords G2")
-print("→ C2= ", hallar_codewords(G2, q, k))
+MatrizGeneradora(G1, n, k, q)
+print("\n Ingrese la Matriz Generadora G2\n")
+MatrizGeneradora(G2, n, k, q)
+print("\n Codewords G1\n")
+hallar_codewords(G1, q, k)
+print("\n Codewords G2\n")
+hallar_codewords(G2, q, k)
