@@ -66,8 +66,8 @@ def permutaciones(G1, G2, q):
 print("Bienvenidx")
 print("Porfavor ingrese los siguientes parametros para la matriz generadora G1 y G2")
 n = int(input("->Digite la longitud del código (n): "))
-k = int(input("->Digite la dimensión del codigo (k): "))
-q = int(input("->Digite la cardinalidad del alfabeto (q): "))
+k = int(input(" ->Digite la dimensión del codigo (k): "))
+q = int(input(" ->Digite la cardinalidad del alfabeto (q): "))
 G1 = []
 G2 =[] 
 print("\nIngrese la Matriz Generadora G1")
@@ -81,12 +81,14 @@ print(Generadora2)
 
 permutaciones_posiciones, intercambios = permutaciones(Generadora1, Generadora2,q)
 if permutaciones_posiciones:
-    print("\nPermutación entre posiciones:", intercambios)
+    print("\n Permutación entre posiciones:", intercambios)
 else:
     print("\nLas matrices generadoras no son equivalentes mediante permutaciones de columnas.")
 
+print("\n Codewords G1")
 codewords_G1 = hallar_codewords(Generadora1, q, k)
-print(f'C1={{{codewords_G1}}}')
+print(f'C1={{ {codewords_G1} }}')
+print("\n Codewords G2")
 codewords_G2 = hallar_codewords(Generadora2, q, k)
-print(f'C2={{{codewords_G2}}}')
+print(f'C2={{ {codewords_G2} }}')
 

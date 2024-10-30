@@ -29,10 +29,7 @@ def hallar_codewords(matriz, q, k): # Hallar los codewords a partir de la matriz
         U = np.array(U) 
         codeword = np.dot(U, matriz) % q # Producto punto y módulo q para Fq
         codewords.append(codeword.tolist()) # Agregar a la lista de codewords
-    # Formatear los codewords para que se vea de la forma de un codigo lineal
-    formateadito_codewords = ','.join(f'({"".join(map(str, cw))})' for cw in codewords)
-
-    return formateadito_codewords
+    return codewords
 
 def encontrar_ciclos(perm): #perm es una lista que representa una permutación de índices
     n = len(perm) # Longitud de la permutación
@@ -52,7 +49,7 @@ def encontrar_ciclos(perm): #perm es una lista que representa una permutación d
     return ciclos # Retorna lista de ciclos, donde cada ciclo es una lista de índices ajustados para que arranquen desde 1
 
 def permutaciones(G1, G2, q):
-    n = G1.shape[1]  # longitud de la matriz generadora
+    n = G1.shape[1]  # longitud 
     for perm in permutations(range(n)):  # Iterar sobre todas las permutaciones posibles de las columnas
         G1_permutada = G1[:, perm]  # Aplicar la permutación a las columnas de G1
         if np.array_equal(G1_permutada, G2):  # Verificar si la matriz permutada es igual a G2
@@ -66,8 +63,8 @@ def permutaciones(G1, G2, q):
 print("Bienvenidx")
 print("Porfavor ingrese los siguientes parametros para la matriz generadora G1 y G2")
 n = int(input("->Digite la longitud del código (n): "))
-k = int(input("->Digite la dimensión del codigo (k): "))
-q = int(input("->Digite la cardinalidad del alfabeto (q): "))
+k = int(input(" ->Digite la dimensión del codigo (k): "))
+q = int(input(" ->Digite la cardinalidad del alfabeto (q): "))
 G1 = []
 G2 =[] 
 print("\nIngrese la Matriz Generadora G1")
@@ -81,12 +78,14 @@ print(Generadora2)
 
 permutaciones_posiciones, intercambios = permutaciones(Generadora1, Generadora2,q)
 if permutaciones_posiciones:
-    print("\nPermutación entre posiciones:", intercambios)
+    print("\n Permutación entre posiciones:", intercambios)
 else:
     print("\nLas matrices generadoras no son equivalentes mediante permutaciones de columnas.")
 
+print("\n Codewords G1")
 codewords_G1 = hallar_codewords(Generadora1, q, k)
-print(f'C1={{{codewords_G1}}}')
+print("→ C1= ", codewords_G1)
+print("\n Codewords G2")
 codewords_G2 = hallar_codewords(Generadora2, q, k)
-print(f'C2={{{codewords_G2}}}')
+print("→ C2= ", codewords_G2)
 
