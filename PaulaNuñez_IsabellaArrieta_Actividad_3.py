@@ -53,16 +53,26 @@ def encontrar_ciclos(perm): #perm es una lista que representa una permutación d
 
 def permutaciones(G1, G2, q):
     n = G1.shape[1]  # longitud de la matriz generadora
+    operaciones = []  # Lista para almacenar las operaciones necesarias para convertir G1 en G2
     for perm in permutations(range(n)):  # Iterar sobre todas las permutaciones posibles de las columnas
         G1_permutada = G1[:, perm]  # Aplicar la permutación a las columnas de G1
-        if np.array_equal(G1_permutada, G2):  # Verificar si la matriz permutada es igual a G2
-            ciclos = encontrar_ciclos(perm)  # Encontrar los ciclos en la permutación
-            # Convertir los ciclos en una cadena en notación cíclica
-            intercambios = ''.join(f'({"".join(map(str, ciclo))})' for ciclo in ciclos)
-            permutaciones_posiciones = True  # Indicar que las matrices son equivalentes mediante permutaciones
-            return permutaciones_posiciones, intercambios  # Retornar el resultado y los intercambios
-    return False, None  # Retornar False si no se encontró ninguna permutación que haga equivalentes las matrices
+        for escalares in product(range(1, q), repeat=n):
+            G1_escalada= np.mod(G1_permutada * escalares, q) 
+            if np.array_equal(G1_escalada, G2):  # Verificar si la matriz permutada es igual a G2
+                ciclos = encontrar_ciclos(perm)  # Encontrar los ciclos en la permutación
+                # Convertir los ciclos en una cadena en notación cíclica
+                intercambios = ''.join(f'({"".join(map(str, ciclo))})' for ciclo in ciclos)
+                permutaciones_posiciones = True  # Indicar que las matrices son equivalentes mediante permutaciones
+                # return permutaciones_posiciones, intercambios  # Retornar el resultado y los intercambios
+                
+            
+                for col, escalar in enumerate(escalares):
+                    if escalar != 1:
+                        operaciones.append(f"Multiplicación por un escalar: columna {col+1} multiplicada por {escalar}")
 
+                return True, intercambios, operaciones
+    return False, None, None  # Retornar False si no se encontró ninguna permutación que haga equivalentes las matrices
+ 
 print("Bienvenidx")
 print("Porfavor ingrese los siguientes parametros para la matriz generadora G1 y G2")
 n = int(input("->Digite la longitud del código (n): "))
@@ -79,12 +89,23 @@ Generadora2 = MatrizGeneradora(G2, n, k, q)
 print("\nMatriz G2:")
 print(Generadora2)
 
-permutaciones_posiciones, intercambios = permutaciones(Generadora1, Generadora2,q)
-if permutaciones_posiciones:
+
+permutaciones_posiciones, intercambios, operaciones = permutaciones(Generadora1, Generadora2,q)
+if permutaciones_posiciones and intercambios!=None:
     print("\nPermutación entre posiciones:", intercambios)
 else:
     print("\nLas matrices generadoras no son equivalentes mediante permutaciones de columnas.")
 
+if operaciones!=None:
+    print("\nOperaciones para convertir G1 en G2:")
+    for operacion in operaciones:
+        if operacion!=None:
+            print(operacion)
+        
+else:
+    print("\nNo se encontraron operaciones para convertir G1 en G2.")
+
+print("\nCodewords de G1 y G2:")
 codewords_G1 = hallar_codewords(Generadora1, q, k)
 print(f'C1={{{codewords_G1}}}')
 codewords_G2 = hallar_codewords(Generadora2, q, k)
