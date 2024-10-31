@@ -95,19 +95,21 @@ while True:
     k = int(input("->Digite la dimensión del código (k): "))
     q = int(input("->Digite la cardinalidad del alfabeto (q): "))
     
-    G1 = [] # Lista para almacenar la matriz generadora G1
-    G2 = [] # Lista para almacenar la matriz generadora G2
+    G1 = []
+    G2 = []
     
     # Solicitar al usuario que ingrese la matriz generadora G1
     print("\nIngrese la Matriz Generadora G1")
     Generadora1 = MatrizGeneradora(G1, n, k, q)  # Llama a la función MatrizGeneradora
     print("\nMatriz G1:")
     print(Generadora1)
+    
     # Solicitar al usuario que ingrese la matriz generadora G2
     print("\nIngrese la Matriz Generadora G2")
     Generadora2 = MatrizGeneradora(G2, n, k, q)  # Llama a la función MatrizGeneradora
     print("\nMatriz G2:")
     print(Generadora2)
+    
     # Verificar si las matrices generadoras son equivalentes
     if permutaciones(Generadora1, Generadora2, q):  # Llama a la función permutaciones
         print("")  # Si son equivalentes, se imprime lo correspondiente en la función permutaciones

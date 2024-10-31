@@ -90,32 +90,24 @@ print("Bienvenidx")
 # Ciclo para que el usuario pueda ingresar más de un conjunto de matrices generadoras
 while True:
     print("Por favor ingrese los siguientes parámetros para la matriz generadora G1 y G2")
-    # Solicitar al usuario la longitud del código, la dimensión del código y la cardinalidad del alfabeto
     n = int(input("->Digite la longitud del código (n): "))
     k = int(input("->Digite la dimensión del código (k): "))
     q = int(input("->Digite la cardinalidad del alfabeto (q): "))
-    
-    G1 = [] # Lista para almacenar la matriz generadora G1
-    G2 = [] # Lista para almacenar la matriz generadora G2
-    
-    # Solicitar al usuario que ingrese la matriz generadora G1
+    G1 = []
+    G2 = []
     print("\nIngrese la Matriz Generadora G1")
-    Generadora1 = MatrizGeneradora(G1, n, k, q)  # Llama a la función MatrizGeneradora
+    Generadora1 = MatrizGeneradora(G1, n, k, q) # Llama a la función MatrizGeneradora
     print("\nMatriz G1:")
     print(Generadora1)
-    # Solicitar al usuario que ingrese la matriz generadora G2
     print("\nIngrese la Matriz Generadora G2")
-    Generadora2 = MatrizGeneradora(G2, n, k, q)  # Llama a la función MatrizGeneradora
+    Generadora2 = MatrizGeneradora(G2, n, k, q) # Llama a la función MatrizGeneradora
     print("\nMatriz G2:")
     print(Generadora2)
-    # Verificar si las matrices generadoras son equivalentes
-    if permutaciones(Generadora1, Generadora2, q):  # Llama a la función permutaciones
-        print("")  # Si son equivalentes, se imprime lo correspondiente en la función permutaciones
-    else:
-        # Si no son equivalentes, se informa al usuario
+    if permutaciones(Generadora1, Generadora2, q): # Llama a la función permutaciones
+        print("") # Si es True, que imprima lo correspondiente en su función
+    else: #
         print("\nLas matrices generadoras no pertenecen a códigos equivalentes. Por favor, intente de nuevo")
-    
-    # Preguntar al usuario si desea ingresar otro conjunto de matrices generadoras
+    # Pregunta si desea continuar
     continuar = input("¿Desea ingresar otro conjunto de matrices generadoras? (s/n): ")
     if continuar.lower() != 's':
         print("\n¡Hasta luego!")

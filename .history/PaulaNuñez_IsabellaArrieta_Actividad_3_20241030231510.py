@@ -53,7 +53,6 @@ def encontrar_ciclos(perm): #perm es una lista que representa una permutación d
 
 def permutaciones(G1, G2, q):  # longitud de la matriz generadora
     n = G1.shape[1]  # longitud de la matriz generadora
-    k = G1.shape[0]  # dimensión de la matriz generadora
     operaciones = []  # Lista para almacenar las operaciones necesarias para convertir G1 en G2
     for perm in permutations(range(n)):  # Iterar sobre todas las permutaciones posibles de las columnas
         G1_permutada = G1[:, perm]  # Aplicar la permutación a las columnas de G1
@@ -69,17 +68,17 @@ def permutaciones(G1, G2, q):  # longitud de la matriz generadora
                     if escalar != 1: # Si el escalar es diferente de 1
                         operaciones.append(f"Multiplicación por un escalar: columna {col+1} multiplicada por {escalar}") # Agregar la operación a la lista
                 if intercambios or operaciones:  # Si hay permutación o operaciones con escalares, imprimirlos.
-                    if intercambios:
-                        print("\nPermutación entre posiciones:", intercambios)
-                    for operacion in operaciones:
-                        print(operacion)
-                    # Hallar los codewords de los códigos lineales generados por las matrices generadoras
-                    codewords_G1 = hallar_codewords(G1, q, k) # Llama a la función hallar_codewords
-                    print(f'C1={{{codewords_G1}}}') # Imprime los codewords de G1
-                    codewords_G2 = hallar_codewords(G2, q, k) # Llama a la función hallar_codewords
-                    print(f'C2={{{codewords_G2}}}') # Imprime los codewords de G2
-                    return es_equivalente  # PARA VALIDACIÓN: Retorna True si se encontró una permutación que haga equivalentes las matrices        
-            else:        
+                            if intercambios:
+                                print("\nPermutación entre posiciones:", intercambios)
+                            for operacion in operaciones:
+                                print(operacion)
+                            # Hallar los codewords de los códigos lineales generados por las matrices generadoras
+                            codewords_G1 = hallar_codewords(Generadora1, q, k) # Llama a la función hallar_codewords
+                            print(f'C1={{{codewords_G1}}}') # Imprime los codewords de G1
+                            codewords_G2 = hallar_codewords(Generadora2, q, k) # Llama a la función hallar_codewords
+                            print(f'C2={{{codewords_G2}}}')
+                            return es_equivalente        
+            else:
                 es_equivalente= False # Para cuestiones de validación
     return es_equivalente  # PARA VALIDACIÓN: Retorna False si no se encontró ninguna permutación que haga equivalentes las matrices
 
@@ -87,35 +86,26 @@ def permutaciones(G1, G2, q):  # longitud de la matriz generadora
 
 # Programa principal - Pide los datos y llama a las funciones necesarias.
 print("Bienvenidx")
-# Ciclo para que el usuario pueda ingresar más de un conjunto de matrices generadoras
 while True:
     print("Por favor ingrese los siguientes parámetros para la matriz generadora G1 y G2")
-    # Solicitar al usuario la longitud del código, la dimensión del código y la cardinalidad del alfabeto
     n = int(input("->Digite la longitud del código (n): "))
     k = int(input("->Digite la dimensión del código (k): "))
     q = int(input("->Digite la cardinalidad del alfabeto (q): "))
-    
-    G1 = [] # Lista para almacenar la matriz generadora G1
-    G2 = [] # Lista para almacenar la matriz generadora G2
-    
-    # Solicitar al usuario que ingrese la matriz generadora G1
+    G1 = []
+    G2 = []
     print("\nIngrese la Matriz Generadora G1")
-    Generadora1 = MatrizGeneradora(G1, n, k, q)  # Llama a la función MatrizGeneradora
+    Generadora1 = MatrizGeneradora(G1, n, k, q)
     print("\nMatriz G1:")
     print(Generadora1)
-    # Solicitar al usuario que ingrese la matriz generadora G2
     print("\nIngrese la Matriz Generadora G2")
-    Generadora2 = MatrizGeneradora(G2, n, k, q)  # Llama a la función MatrizGeneradora
+    Generadora2 = MatrizGeneradora(G2, n, k, q)
     print("\nMatriz G2:")
     print(Generadora2)
-    # Verificar si las matrices generadoras son equivalentes
-    if permutaciones(Generadora1, Generadora2, q):  # Llama a la función permutaciones
-        print("")  # Si son equivalentes, se imprime lo correspondiente en la función permutaciones
-    else:
-        # Si no son equivalentes, se informa al usuario
+    if permutaciones(Generadora1, Generadora2, q):
+        print("")
+    else: #Para validación de la función
         print("\nLas matrices generadoras no pertenecen a códigos equivalentes. Por favor, intente de nuevo")
     
-    # Preguntar al usuario si desea ingresar otro conjunto de matrices generadoras
     continuar = input("¿Desea ingresar otro conjunto de matrices generadoras? (s/n): ")
     if continuar.lower() != 's':
         print("\n¡Hasta luego!")

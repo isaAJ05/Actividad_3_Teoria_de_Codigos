@@ -108,6 +108,7 @@ while True:
     Generadora2 = MatrizGeneradora(G2, n, k, q)  # Llama a la función MatrizGeneradora
     print("\nMatriz G2:")
     print(Generadora2)
+    
     # Verificar si las matrices generadoras son equivalentes
     if permutaciones(Generadora1, Generadora2, q):  # Llama a la función permutaciones
         print("")  # Si son equivalentes, se imprime lo correspondiente en la función permutaciones
