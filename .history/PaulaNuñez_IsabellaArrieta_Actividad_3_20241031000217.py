@@ -108,10 +108,11 @@ while True:
     Generadora2 = MatrizGeneradora(G2, n, k, q)  # Llama a la función MatrizGeneradora
     print("\nMatriz G2:")
     print(Generadora2)
-    #Llamar a la funcion permutaciones, teniendo en cuenta si las matrices generadoras son equivalentes
-    if permutaciones(Generadora1, Generadora2, q):  
-        print("")  # Si son equivalentes, se imprime las operaciones que se realizaron para obtener la equivalencia y retorna los codewords de cada código.
-    else: #Si no son equivalentes, se informa al usuario (por cuestiones de validación)
+    #Llamar a la funcion permutaciones, teniendo en cuenta que las matrices
+    if permutaciones(Generadora1, Generadora2, q):  # Llama a la función permutaciones
+        print("")  # Si son equivalentes, se imprime lo correspondiente en la función permutaciones
+    else:
+        # Si no son equivalentes, se informa al usuario
         print("\nLas matrices generadoras no pertenecen a códigos equivalentes. Por favor, intente de nuevo")
     
     # Preguntar al usuario si desea ingresar otro conjunto de matrices generadoras
